@@ -1,26 +1,32 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-</template>
+<script setup>
+import { faker } from "@faker-js/faker";
+import { computed } from "vue";
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+const products = computed(() =>
+  Array.from({ length: 10 }, (_, index) => ({
+    name: faker.commerce.productName(),
+    description: faker.commerce.productDescription(),
+    img: require(`./assets/chico-rei-${index + 1}.jpeg`),
+    price: faker.commerce.price(),
+  }))
+);
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+
+<template>
+  <div class="container">
+    <h1>Camisetas</h1>
+    <ul>
+      <li v-for="product in products" :key="product.name">
+        <div class="content">
+          <img :src="product.img" alt="product" class="image" />
+          <div class="info">
+            <h2>{{ product.name }}</h2>
+            <span>{{ product.description }}</span>
+            <p>R$ {{ product.price.replace(".", ",") }}</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</template>
