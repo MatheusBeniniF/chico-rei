@@ -1,5 +1,6 @@
 @primary-color: #fff;
-@secondary-color: #000000;
+@secondary-color: #d62e2e;
+@error-color: #c43c3c;
 @title: 20px;
 @subtitle: 16px;
 @description: 14px;
@@ -15,6 +16,8 @@ h1 {
   display: flex;
   justify-content: center;
   color: @secondary-color;
+  text-align: center;
+  flex-grow: 1;
 }
 
 ul {
@@ -48,12 +51,6 @@ ul {
   flex-direction: column;
 }
 
-span {
-  font-size: @description;
-  display: block;
-  margin: 0.5rem 0;
-}
-
 p {
   font-size: @description;
   font-weight: bold;
@@ -61,9 +58,40 @@ p {
   margin: 0;
 }
 
+.error {
+  color: @error-color;
+}
+
+.description {
+  font-size: @description;
+  font-weight: 400;
+  display: block;
+  margin: 0.5rem 0;
+}
+
 h2 {
   font-size: @subtitle;
   margin: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-button {
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.cart-button:hover {
+  background-color: #e68900;
 }
 
 @media screen and (max-width: 769px) {
