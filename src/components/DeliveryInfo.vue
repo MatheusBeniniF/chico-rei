@@ -1,18 +1,24 @@
 <template>
   <div class="container">
     <h3>Informações de entrega</h3>
-    <label for="cep">CEP</label>
-    <div class="cep-container">
-      <input v-model="localForm.cep" @blur="fetchAddress">
-      <button :disabled="loadingCep" @click="fetchAddress">
-        🔍
-      </button>
+    <div>
+
+      <label for="cep">CEP</label>
+      <div class="cep-container">
+        <input v-model="localForm.cep" @blur="fetchAddress">
+        <button :disabled="loadingCep" @click="fetchAddress">
+          🔍
+        </button>
+      </div>
     </div>
     <span v-if="errors.cep" class="error">{{ errors.cep[0] }}</span>
 
-    <label for="street">Rua</label>
-    <input v-model="localForm.street">
-    <span v-if="errors.street" class="error">{{ errors.street[0] }}</span>
+    <div>
+
+      <label for="street">Rua</label>
+      <input v-model="localForm.street">
+      <span v-if="errors.street" class="error">{{ errors.street[0] }}</span>
+    </div>
 
     <div class="side-by-side">
       <div class="side-1">
@@ -29,7 +35,7 @@
     <div class="side-by-side">
       <div class="side-2">
         <label for="number">Número</label>
-        <input v-model="localForm.number">
+        <input v-model="localForm.number" type="number">
         <span v-if="errors.number" class="error">{{ errors.number[0] }}</span>
 
       </div>

@@ -79,7 +79,9 @@ const updateQuantity = (value) => {
   product.value.quantity = value;
 };
 
-const submitOrder = () => {
+const submitOrder = (e) => {
+  e.preventDefault();
+  
   const result = schema.safeParse(form.value);
   if (!result.success) {
     errors.value = result.error.flatten().fieldErrors;
@@ -90,7 +92,7 @@ const submitOrder = () => {
 </script>
 
 <template>
-  <div>
+  <form @submit="submitOrder">
     <button class="submit-btn" @click="goToHome">
       Voltar para a home
     </button>
@@ -102,7 +104,7 @@ const submitOrder = () => {
         <DeliveryInfo :form="form" :errors="errors" :fetch-address="fetchAddress" :loading-cep="loadingCep" />
         <PaymentInfo :form="form" :errors="errors" />
 
-        <button class="submit-btn" @click="submitOrder">
+        <button class="submit-btn" type="submit">
           Fechar pedido
         </button>
 
@@ -113,7 +115,7 @@ const submitOrder = () => {
 
       <BagInfo :product="product" :update-quantity="updateQuantity" />
     </div>
-  </div>
+  </form>
 
 </template>
 

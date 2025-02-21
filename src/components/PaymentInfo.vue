@@ -2,18 +2,22 @@
   <div class="container">
     <h3>Informações de pagamento</h3>
 
-    <label for="cardNumber">Número do cartão</label>
-    <input v-model="localForm.cardNumber" type="number" />
-    <span v-if="errors.cardNumber" class="error">
-      {{ errors.cardNumber[0] }}
-    </span>
+    <div>
+      <label for="cardNumber">Número do cartão</label>
+      <input v-model="localForm.cardNumber" type="number" />
+      <span v-if="errors.cardNumber" class="error">
+        {{ errors.cardNumber[0] }}
+      </span>
+    </div>
 
-    <label for="cardHolder">Titular do cartão</label>
-    <input v-model="localForm.cardHolder" />
-    <span v-if="errors.cardHolder" class="error">
-      {{ errors.cardHolder[0] }}
-    </span>
-
+    <div>
+      <label for="cardHolder">Titular do cartão</label>
+      <input v-model="localForm.cardHolder" />
+      <span v-if="errors.cardHolder" class="error">
+        {{ errors.cardHolder[0] }}
+      </span>
+    </div>
+      
     <div class="side-by-side">
       <div class="side-2">
         <label for="expiration">Data de vencimento</label>
