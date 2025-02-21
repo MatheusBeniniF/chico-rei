@@ -90,28 +90,59 @@ const submitOrder = () => {
 </script>
 
 <template>
-  <button class="submit-btn" @click="goToHome">Voltar para a home</button>
+  <button
+    class="submit-btn"
+    @click="goToHome"
+  >
+    Voltar para a home
+  </button>
   <div class="checkout-container">
-    <div v-if="loadingCep" class="loading-overlay">
-      <div class="spinner"></div>
+    <div
+      v-if="loadingCep"
+      class="loading-overlay"
+    >
+      <div class="spinner" />
     </div>
 
     <div class="form-container">
       <h2>Finalização do pedido</h2>
 
-      <ContactInfo :form="form" :errors="errors" />
-      <DeliveryInfo :form="form" :errors="errors" :fetchAddress="fetchAddress" :loadingCep="loadingCep" />
-      <PaymentInfo :form="form" :errors="errors" />
+      <ContactInfo
+        :form="form"
+        :errors="errors" 
+      />
+      <DeliveryInfo
+        :form="form"
+        :errors="errors" 
+        :fetch-address="fetchAddress"
+        :loading-cep="loadingCep" 
+      />
+      <PaymentInfo
+        :form="form"
+        :errors="errors" 
+      />
 
-      <button class="submit-btn" @click="submitOrder">Fechar pedido</button>
+      <button
+        class="submit-btn"
+        @click="submitOrder"
+      >
+        Fechar pedido
+      </button>
 
-      <div v-if="successMessage" class="success-message">
+      <div 
+        v-if="successMessage" 
+        class="success-message"
+      >
         Pedido finalizado com sucesso!
       </div>
     </div>
 
-    <BagInfo :product="product" :updateQuantity="updateQuantity" />
+    <BagInfo
+      :product="product"
+      :update-quantity="updateQuantity" 
+    />
   </div>
 </template>
 
 <style lang="less" src="@/styles/checkout.less"></style>
+
