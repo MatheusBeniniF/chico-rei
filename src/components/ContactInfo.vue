@@ -1,6 +1,7 @@
 <template>
   <div>
     <h3>Informações de contato</h3>
+    <label for="email">E-mail</label>
     <input
       v-model="localForm.email"
       placeholder="E-mail"
@@ -10,6 +11,7 @@
       class="error"
     >{{ errors.email[0] }}</span>
 
+    <label for="phone">Telefone</label>
     <input
       v-model="localForm.phone"
       placeholder="Telefone"

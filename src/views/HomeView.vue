@@ -81,3 +81,4 @@ const goToCheckout = () => {
     </ul>
   </div>
 </template>
+<style lang="less" src="@/styles/home.less"></style>
