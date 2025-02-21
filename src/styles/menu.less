@@ -1,0 +1,53 @@
+.menu-icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1000;
+  }
+  
+  .menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: left 0.5s ease;
+    z-index: 999;
+  }
+  
+  .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    font-size: 20px;
+  }
+  
+  .close-icon {
+    font-size: 14px;
+    cursor: pointer;
+    padding-left: 10px;
+  }
+  
+  .menu-open {
+    left: 0;
+    animation: slideIn 0.5s forwards;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  @keyframes slideIn {
+    0% {
+      left: -250px;
+    }
+  
+    100% {
+      left: 0;
+    }
+  }
