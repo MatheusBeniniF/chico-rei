@@ -2,20 +2,14 @@
   <div>
     <h3>Informações de contato</h3>
     <label for="email">E-mail</label>
-    <input
-      v-model="localForm.email"
-      placeholder="E-mail"
-    >
+    <input v-model="localForm.email">
     <span
       v-if="errors.email"
       class="error"
     >{{ errors.email[0] }}</span>
 
     <label for="phone">Telefone</label>
-    <input
-      v-model="localForm.phone"
-      placeholder="Telefone"
-    >
+    <input v-model="localForm.phone">
     <span
       v-if="errors.phone"
       class="error"
