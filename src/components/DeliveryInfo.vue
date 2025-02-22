@@ -2,12 +2,11 @@
   <div class="container">
     <h3>Informações de entrega</h3>
     <div>
-
       <label for="cep">CEP</label>
       <div class="cep-container">
-        <input v-model="localForm.cep" @blur="fetchAddress">
-        <button :disabled="loadingCep" @click="fetchAddress">
-          🔍
+        <input v-model="localForm.cep">
+        <button :disabled="loadingCep" @click="fetchAddress(localForm.cep)" type="button">
+  🔍
         </button>
       </div>
     </div>
@@ -35,7 +34,7 @@
     <div class="side-by-side">
       <div class="side-2">
         <label for="number">Número</label>
-        <input v-model="localForm.number" type="number">
+        <input v-model="localForm.number">
         <span v-if="errors.number" class="error">{{ errors.number[0] }}</span>
 
       </div>
@@ -82,4 +81,5 @@ watch(
   },
   { deep: true }
 );
+
 </script>

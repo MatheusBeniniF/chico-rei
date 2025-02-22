@@ -21,7 +21,7 @@
     <div class="side-by-side">
       <div class="side-2">
         <label for="expiration">Data de vencimento</label>
-        <input v-model="localForm.expiration" type="number" />
+        <input v-model="localForm.expiration" />
         <span v-if="errors.expiration" class="error">
           {{ errors.expiration[0] }}
         </span>

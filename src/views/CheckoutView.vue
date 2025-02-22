@@ -38,7 +38,7 @@ const form = ref({
 
 const schema = z.object({
   email: z.string().email("E-mail inválido"),
-  phone: z.string().regex(/^\(\d{2}\) \d{4,5}-\d{4}$/, "Telefone inválido"),
+  phone: z.string().regex(/^\d{10,11}$/, "Telefone inválido"),
   cep: z.string().regex(/^\d{5}-\d{3}$/, "CEP inválido"),
   street: z.string().min(1, "Campo obrigatório"),
   neighborhood: z.string().min(1, "Campo obrigatório"),
@@ -55,23 +55,22 @@ const errors = ref({});
 const loadingCep = ref(false);
 const successMessage = ref(false);
 
-const fetchAddress = async () => {
-  if (!form.value.cep.match(/^\d{5}-\d{3}$/)) return;
+const fetchAddress = async (cepValue) => {
   loadingCep.value = true;
 
   setTimeout(async () => {
-    try {
-      const data = await cep(form.value.cep.replace("-", ""));
-      form.value.street = data.street;
-      form.value.city = data.city;
-      form.value.state = data.state;
-      form.value.neighborhood = data.neighborhood;
-    } catch (error) {
-      console.error(error);
-    } finally {
-      loadingCep.value = false;
-    }
-  }, 3000);
+  try {
+    const data = await cep(cepValue.replace("-", ""));
+    form.value.street = data.street;
+    form.value.city = data.city;
+    form.value.state = data.state;
+    form.value.neighborhood = data.neighborhood;
+  } catch (error) {
+    console.error(error);
+  } finally {
+    loadingCep.value = false;
+  }
+  }, 2000);
 };
 
 const updateQuantity = (value) => {
@@ -79,7 +78,7 @@ const updateQuantity = (value) => {
   product.value.quantity = value;
 };
 
-const submitOrder = (e) => {
+const submitOrder = (e) => {  
   e.preventDefault();
   
   const result = schema.safeParse(form.value);
@@ -93,15 +92,24 @@ const submitOrder = (e) => {
 
 <template>
   <form @submit="submitOrder">
-    <button class="submit-btn" @click="goToHome">
+    <button class="back-home" @click="goToHome">
       Voltar para a home
     </button>
     <div class="checkout-container">
+      <div v-if="loadingCep" class="loading-overlay">
+        <div class="spinner"></div>
+      </div>
       <div class="form-container">
         <h2>Finalização do pedido</h2>
 
         <ContactInfo :form="form" :errors="errors" />
-        <DeliveryInfo :form="form" :errors="errors" :fetch-address="fetchAddress" :loading-cep="loadingCep" />
+        <DeliveryInfo 
+          :form="form" 
+          @update:form="(newForm) => form = newForm"
+          :errors="errors" 
+          :fetch-address="fetchAddress" 
+          :loading-cep="loadingCep" 
+        />
         <PaymentInfo :form="form" :errors="errors" />
 
         <button class="submit-btn" type="submit">
