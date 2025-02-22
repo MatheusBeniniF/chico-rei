@@ -1,19 +1,3 @@
-<template>
-  <div>
-    <h3>Informações de contato</h3>
-    <div>
-      <label for="email">E-mail</label>
-      <input v-model="localForm.email">
-      <span v-if="errors.email" class="error">{{ errors.email[0] }}</span>
-    </div>
-    <div>
-      <label for="phone">Telefone</label>
-      <input v-model="localForm.phone">
-      <span v-if="errors.phone" class="error">{{ errors.phone[0] }}</span>
-    </div>
-  </div>
-</template>
-
 <script setup>
 import { ref, watch } from "vue";
 import { defineProps } from "vue";
@@ -41,3 +25,20 @@ watch(
   { deep: true }
 );
 </script>
+
+<template>
+  <div>
+    <h3>Informações de contato</h3>
+    <div>
+      <label for="email">E-mail</label>
+      <input v-model="localForm.email">
+      <span v-if="errors.email" class="error">{{ errors.email[0] }}</span>
+    </div>
+    <div>
+      <label for="phone">Telefone</label>
+      <input v-model="localForm.phone">
+      <span v-if="errors.phone" class="error">{{ errors.phone[0] }}</span>
+    </div>
+  </div>
+</template>
+

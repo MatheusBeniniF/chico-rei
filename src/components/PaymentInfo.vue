@@ -1,3 +1,31 @@
+<script setup>
+import { ref, watch } from "vue";
+import { defineProps } from "vue";
+
+const props = defineProps({
+  form: {
+    type: Object,
+    required: true,
+  },
+  errors: {
+    type: Object,
+    required: true,
+  },
+});
+
+const localForm = ref({ ...props.form });
+
+const emit = defineEmits(["update:form"]);
+
+watch(
+  localForm,
+  (newValue) => {
+    emit("update:form", newValue);
+  },
+  { deep: true }
+);
+</script>
+
 <template>
   <div class="container">
     <h3>Informações de pagamento</h3>
@@ -34,31 +62,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref, watch } from "vue";
-import { defineProps } from "vue";
-
-const props = defineProps({
-  form: {
-    type: Object,
-    required: true,
-  },
-  errors: {
-    type: Object,
-    required: true,
-  },
-});
-
-const localForm = ref({ ...props.form });
-
-const emit = defineEmits(["update:form"]);
-
-watch(
-  localForm,
-  (newValue) => {
-    emit("update:form", newValue);
-  },
-  { deep: true }
-);
-</script>
