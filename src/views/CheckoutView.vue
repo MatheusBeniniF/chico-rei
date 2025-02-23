@@ -2,11 +2,8 @@
 import { ref } from "vue";
 import cep from "cep-promise";
 import { z } from "zod";
-import ContactInfo from "@/components/ContactInfo.vue";
-import DeliveryInfo from "@/components/DeliveryInfo.vue";
-import PaymentInfo from "@/components/PaymentInfo.vue";
-import BagInfo from "@/components/BagInfo.vue";
 import { useRouter } from "vue-router";
+import BagInfo from "@/components/BagInfo.vue";
 
 const router = useRouter();
 
@@ -59,17 +56,17 @@ const fetchAddress = async (cepValue) => {
   loadingCep.value = true;
 
   setTimeout(async () => {
-  try {
-    const data = await cep(cepValue.replace("-", ""));
-    form.value.street = data.street;
-    form.value.city = data.city;
-    form.value.state = data.state;
-    form.value.neighborhood = data.neighborhood;
-  } catch (error) {
-    console.error(error);
-  } finally {
-    loadingCep.value = false;
-  }
+    try {
+      const data = await cep(cepValue.replace("-", ""));
+      form.value.street = data.street;
+      form.value.city = data.city;
+      form.value.state = data.state;
+      form.value.neighborhood = data.neighborhood;
+    } catch (error) {
+      console.error(error);
+    } finally {
+      loadingCep.value = false;
+    }
   }, 2000);
 };
 
@@ -99,32 +96,109 @@ const submitOrder = (e) => {
       <div v-if="loadingCep" class="loading-overlay">
         <div class="spinner"></div>
       </div>
+      <div v-if="successMessage" class="success-message">
+          Pedido finalizado com sucesso!
+        </div>
       <div class="form-container">
         <h2>Finalização do pedido</h2>
 
-        <ContactInfo :form="form" :errors="errors" />
-        <DeliveryInfo 
-          :form="form" 
-          @update:form="(newForm) => form = newForm"
-          :errors="errors" 
-          :fetch-address="fetchAddress" 
-          :loading-cep="loadingCep" 
-        />
-        <PaymentInfo :form="form" :errors="errors" />
+        <!-- Informações de Contato -->
+        <h3>Informações de contato</h3>
+        <div>
+          <label for="email">E-mail</label>
+          <input v-model="form.email">
+          <span v-if="errors.email" class="error">{{ errors.email[0] }}</span>
+        </div>
+        <div>
+          <label for="phone">Telefone</label>
+          <input v-model="form.phone">
+          <span v-if="errors.phone" class="error">{{ errors.phone[0] }}</span>
+        </div>
+
+        <!-- Informações de Entrega -->
+        <h3>Informações de entrega</h3>
+        <div>
+          <label for="cep">CEP</label>
+          <div class="cep-container">
+            <input v-model="form.cep">
+            <button :disabled="loadingCep" @click="fetchAddress(form.cep)" type="button">🔍</button>
+          </div>
+        </div>
+        <span v-if="errors.cep" class="error">{{ errors.cep[0] }}</span>
+
+        <div>
+          <label for="street">Rua</label>
+          <input v-model="form.street">
+          <span v-if="errors.street" class="error">{{ errors.street[0] }}</span>
+        </div>
+
+        <div class="side-by-side">
+          <div class="side-1">
+            <label for="city">Cidade</label>
+            <input v-model="form.city">
+            <span v-if="errors.city" class="error">{{ errors.city[0] }}</span>
+          </div>
+          <div class="side-2">
+            <label for="neighborhood">Bairro</label>
+            <input v-model="form.neighborhood">
+            <span v-if="errors.neighborhood" class="error">{{ errors.neighborhood[0] }}</span>
+          </div>
+        </div>
+
+        <div class="side-by-side">
+          <div class="side-2">
+            <label for="number">Número</label>
+            <input v-model="form.number">
+            <span v-if="errors.number" class="error">{{ errors.number[0] }}</span>
+          </div>
+          <div class="side-1">
+            <label for="state">Estado</label>
+            <input v-model="form.state">
+            <span v-if="errors.state" class="error">{{ errors.state[0] }}</span>
+          </div>
+        </div>
+
+        <!-- Informações de Pagamento -->
+        <h3>Informações de pagamento</h3>
+        <div>
+          <label for="cardNumber">Número do cartão</label>
+          <input v-model="form.cardNumber" />
+          <span v-if="errors.cardNumber" class="error">
+            {{ errors.cardNumber[0] }}
+          </span>
+        </div>
+
+        <div>
+          <label for="cardHolder">Titular do cartão</label>
+          <input v-model="form.cardHolder" />
+          <span v-if="errors.cardHolder" class="error">
+            {{ errors.cardHolder[0] }}
+          </span>
+        </div>
+        
+        <div class="side-by-side">
+          <div class="side-2">
+            <label for="expiration">Data de vencimento</label>
+            <input v-model="form.expiration" />
+            <span v-if="errors.expiration" class="error">
+              {{ errors.expiration[0] }}
+            </span>
+          </div>
+          <div class="side-1">
+            <label for="cvc">CVC</label>
+            <input v-model="form.cvc" />
+            <span v-if="errors.cvc" class="error">{{ errors.cvc[0] }}</span>
+          </div>
+        </div>
 
         <button class="submit-btn" type="submit">
           Fechar pedido
         </button>
-
-        <div v-if="successMessage" class="success-message">
-          Pedido finalizado com sucesso!
-        </div>
       </div>
 
       <BagInfo :product="product" :update-quantity="updateQuantity" />
     </div>
   </form>
-
 </template>
 
 <style lang="less" src="@/styles/checkout.less"></style>
