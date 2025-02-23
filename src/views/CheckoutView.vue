@@ -45,7 +45,7 @@ const schema = z.object({
   cardNumber: z.string().regex(/^\d{16}$/, "Número do cartão inválido"),
   cardHolder: z.string().min(1, "Campo obrigatório"),
   expiration: z.string().regex(/^\d{2}\/\d{2}$/, "Formato inválido (MM/AA)"),
-  cvc: z.string().regex(/^\d{3,4}$/, "CVC inválido"),
+  cvc: z.number(/^\d{3,4}$/, "CVC inválido"),
 });
 
 const errors = ref({});
@@ -75,6 +75,16 @@ const updateQuantity = (value) => {
   product.value.quantity = value;
 };
 
+const verifyCardDate = () => {
+  const now = new Date();
+  const expirationDate = new Date(form.value.expiration);
+  if (expirationDate < now) {
+    errors.value.expiration = ["Data de vencimento inválida"];
+  } else {
+    errors.value.expiration = undefined;
+  }
+};
+
 const submitOrder = (e) => {  
   e.preventDefault();
   
@@ -96,10 +106,10 @@ const submitOrder = (e) => {
       <div v-if="loadingCep" class="loading-overlay">
         <div class="spinner"></div>
       </div>
-      <div v-if="successMessage" class="success-message">
-          Pedido finalizado com sucesso!
-        </div>
       <div class="form-container">
+        <div v-if="successMessage" class="success-message">
+            Pedido finalizado com sucesso!
+        </div>
         <h2>Finalização do pedido</h2>
 
         <!-- Informações de Contato -->
@@ -179,14 +189,14 @@ const submitOrder = (e) => {
         <div class="side-by-side">
           <div class="side-2">
             <label for="expiration">Data de vencimento</label>
-            <input v-model="form.expiration" />
+            <input v-model="form.expiration" @change="verifyCardDate" />
             <span v-if="errors.expiration" class="error">
               {{ errors.expiration[0] }}
             </span>
           </div>
           <div class="side-1">
             <label for="cvc">CVC</label>
-            <input v-model="form.cvc" />
+            <input v-model="form.cvc" type="number" pattern="[1-9]{3}" maxlength="3" />
             <span v-if="errors.cvc" class="error">{{ errors.cvc[0] }}</span>
           </div>
         </div>
