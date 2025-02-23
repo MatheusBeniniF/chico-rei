@@ -1,21 +1,35 @@
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { ref, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
 
 const router = useRouter();
-const selectedOption = ref("all");
+const route = useRoute();
+
+const selectedOption = ref(route.query.filter || "home");
 
 const onClick = () => {
-  router.push(`/${selectedOption.value === "home" ? "" : selectedOption.value}`);
+  router.push({
+    path: `/${selectedOption.value === "home" ? "" : selectedOption.value}`,
+    query: { filter: selectedOption.value },
+  });
 };
+
+watch(
+  () => route.query.filter,
+  (newFilter) => {
+    if (newFilter) {
+      selectedOption.value = newFilter;
+    }
+  }
+);
 </script>
 
 <template>
   <div class="filter">
     <select v-model="selectedOption" @change="onClick">
-      <option :value="'home'">Todas as camisetas</option>
-      <option :value="'camisetas-claras'">Camisetas claras</option>
-      <option :value="'camisetas-escuras'">Camisetas escuras</option>
+      <option value="home">Todas as camisetas</option>
+      <option value="camisetas-claras">Camisetas claras</option>
+      <option value="camisetas-escuras">Camisetas escuras</option>
     </select>
   </div>
 </template>
