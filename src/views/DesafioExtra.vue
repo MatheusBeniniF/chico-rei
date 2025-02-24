@@ -8,8 +8,8 @@ import PhoneIcon from "@/svgs/phone.svg";
 import RetinaIcon from "@/svgs/retina.svg";
 </script>
 <template>
-  <div class="container">
-    <div class="content">
+  <div class="container-desafio">
+    <div class="content-desafio">
       <h4>APP FEATURES</h4>
       <h7>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra nunc
@@ -21,7 +21,7 @@ import RetinaIcon from "@/svgs/retina.svg";
       </h7>
     </div>
 
-    <div class="content top-info">
+    <div class="content-desafio top-info">
       <img :src="ChatIcon" alt="Ícone de Chat" class="svg" />
       <h5>Full free chat</h5>
       <h7>
@@ -29,8 +29,8 @@ import RetinaIcon from "@/svgs/retina.svg";
         adipiscing elit.
       </h7>
     </div>
-    <div class="content-img">
-      <div class="content-side">
+    <div class="content-desafio-img">
+      <div class="content-desafio-side">
         <div>
           <div>
             <img :src="BrowserIcon" alt="Ícone de Navegador" class="svg" />
@@ -49,7 +49,7 @@ import RetinaIcon from "@/svgs/retina.svg";
 
       <img class="app" :src="App" alt="Imagem de fundo" />
 
-      <div class="content-side">
+      <div class="content-desafio-side">
         <div>
           <img :src="PhoneIcon" alt="Ícone de Telefone" class="svg" />
           <h5>iso & androind version</h5>
@@ -63,7 +63,7 @@ import RetinaIcon from "@/svgs/retina.svg";
       </div>
     </div>
 
-    <div class="content">
+    <div class="content-desafio">
       <img :src="GroupIcon" alt="Ícone de Grupo" class="svg" />
       <h4>24/7 support by real pepole</h4>
       <h7>
