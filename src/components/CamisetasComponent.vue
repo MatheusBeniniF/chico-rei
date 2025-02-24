@@ -46,7 +46,7 @@ const goToCheckout = () => {
           <img :src="product.img" alt="product" class="image" />
           <div class="info">
             <div class="product-info">
-              <h2>{{ product.name }}</h2>
+              <h2 class="product-name">{{ product.name }}</h2>
               <p class="description">
                 {{ product.description }}
               </p>
