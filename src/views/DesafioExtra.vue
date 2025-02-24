@@ -23,7 +23,7 @@ import RetinaIcon from "@/svgs/retina.svg";
 
     <div class="content-desafio top-info">
       <img :src="ChatIcon" alt="Ícone de Chat" class="svg" />
-      <h5>Full free chat</h5>
+      <h5>FULL FREE CHAT</h5>
       <h7>
         Lorem ipsum dolor sit amet, consectetur <br />
         adipiscing elit.
@@ -35,15 +35,15 @@ import RetinaIcon from "@/svgs/retina.svg";
           <div>
             <img :src="BrowserIcon" alt="Ícone de Navegador" class="svg" />
           </div>
-          <h5>unlimiter features</h5>
-          <h7>Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit.</h7>
+          <h5 class="right-position">UNLIMITER FEATURES</h5>
+          <h7 class="right-position">Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit.</h7>
         </div>
         <div>
           <div>
             <img :src="DesignIcon" alt="Ícone de Design" class="svg" />
           </div>
-          <h5>awsome ui design</h5>
-          <h7>Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit.</h7>
+          <h5 class="right-position">AWESOME UI DESIGN</h5>
+          <h7 class="right-position">Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit.</h7>
         </div>
       </div>
 
@@ -52,12 +52,12 @@ import RetinaIcon from "@/svgs/retina.svg";
       <div class="content-desafio-side">
         <div>
           <img :src="PhoneIcon" alt="Ícone de Telefone" class="svg" />
-          <h5>iso & androind version</h5>
+          <h5>ISO & ANDROID VERSION</h5>
           <h7>Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit.</h7>
         </div>
         <div>
           <img :src="RetinaIcon" alt="Ícone de Retina" class="svg" />
-          <h5>retina ready greaphics</h5>
+          <h5>RETINA READY GRAPHICS</h5>
           <h7>Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit.</h7>
         </div>
       </div>
@@ -65,7 +65,7 @@ import RetinaIcon from "@/svgs/retina.svg";
 
     <div class="content-desafio">
       <img :src="GroupIcon" alt="Ícone de Grupo" class="svg" />
-      <h4>24/7 support by real pepole</h4>
+      <h4>24/7 SUPPORT BY REAL PEOPLE</h4>
       <h7>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </h7>
